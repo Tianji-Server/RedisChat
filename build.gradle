@@ -108,6 +108,7 @@ java {
     }
 
     withSourcesJar()
+    withJavadocJar()
 }
 compileJava.options.release.set releaseJavaVersion
 compileJava.options.encoding 'UTF-8'
@@ -129,6 +130,17 @@ processResources {
     }
 }
 
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            groupId = 'dev.unnm3d'
+            artifactId = 'redischat'
+            version = "$version"
+            artifact shadowJar
+            artifact javadocJar
+            artifact sourcesJar
+        }
+    }
 }
 
 jar.dependsOn shadowJar
